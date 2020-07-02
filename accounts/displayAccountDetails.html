@@ -1,0 +1,81 @@
+<!--
+Function of page:
+To view personal account details
+
+Description:
+Details include Merchant name, Registered shop name, email, password , contact number and address
+-->
+{% include "./common/header.html" %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./accounts/accounts.css') }}">
+<script>
+    x=document.getElementById('profile');
+    x.className="w3-dropdown-hover w3-right active";
+    </script>
+<script>
+    function editAccount() {
+        var x = "/editaccountinfo/";
+        return window.location = x;
+    }
+</script>
+<body>
+<center>
+    <h1 style="color:#1a1f71; font-weight: bold;">Account Details</h1>
+
+        <div id="newForm" class="containerForm">
+            <table style="border-spacing: 40px 20px; border-collapse: initial;">
+                <tr>
+                    <td>
+                        <h4><label for="Name" style="font-weight: bold">Merchant name : </label> </h4>
+                    </td>
+                    <td><h4> <label id="Name" style="width: 50%; background-color: white">{{ result['Name'] }}</label></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="rName" style="font-weight: bold">Registered shop name : </label> </h4>
+                    </td>
+                    <td><h4><label id="rName" style=" width: 50%; background-color: white " >{{ result['RegisteredName'] }}</label> </h4></td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="email" style="font-weight: bold">Email id : </label></h4>
+                    </td>
+                    <td>
+                        <h4><label id="email" style=" width: 50%; background-color: white">{{ result['EmailID'] }}</label></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="contact" style="font-weight: bold">Contact number : </label></h4>
+                    </td>
+                    <td><h4><label id="contact" style="width: 50%; background-color: white">{{ result['ContactNumber'] }}</label></h4>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="add" style="font-weight: bold">Address : </label></h4>
+                    </td>
+                    <td><h4> <label id="add" style="width: 50%; background-color: white">{{ result['Address'] }}</label></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="pass" style="font-weight: bold">Password : </label> </h4>
+                    </td>
+                    <td><h4>  <label id="pass" style=" width: 50%; background-color: white">
+                        {% for i in result['Password'] %}
+                        *
+                        {% endfor %}
+                    </label></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><h4><input type="submit" onclick="editAccount()" value="Edit Above Details" ></h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</center>
+</body>
+</html>

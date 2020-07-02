@@ -1,0 +1,95 @@
+<!--
+Function of page:
+To view and edit personal account details
+
+Description:
+Details include Merchant name, Registered shop name, email, password , contact number and address
+-->
+{% include "./common/header.html" %}
+<link rel="stylesheet" href="{{ url_for('static',filename='./accounts/accounts.css') }}">
+<script>
+    function goBack() {
+        return window.location='/';
+
+    }
+</script>
+<script>
+    x=document.getElementById('profile');
+    x.className="w3-dropdown-hover w3-right active";
+    </script>
+<body>
+<center>
+    <h1 style="color:#1a1f71; font-weight: bold;">Account Details</h1>
+    <form id="form1" method="post" style="border: none;" action="/editaccountinfo/">
+        <div id="newForm" class="containerForm">
+            <table style="border-spacing: 10px 15px; border-collapse: initial;">
+                <tr>
+                    <td>
+                        <h4><label for="Name" style="font-weight: bold">Name : </label> </h4>
+                    </td>
+                    <td>
+                        <input id="Name" value="{{ result['Name'] }}" name="name" type="text" required></h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="rName" style="font-weight: bold">Registered Name : </label> </h4>
+                    </td>
+                    <td>
+                        <input id="rName"value="{{ result['RegisteredName'] }}" name="registeredName" type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="email" style="font-weight: bold">Email id : </label></h4>
+                    </td>
+                    <td>
+                        <input id="email"value="{{ result['EmailID']}}" name="emailid" type="email" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="contact" style="font-weight: bold">Contact number : </label></h4>
+                    </td>
+                    <td>
+                        <input id="contact"value="{{ result['ContactNumber'] }}" name="contactno" type="text" required>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="add" style="font-weight: bold">Address : </label></h4>
+                    </td>
+                    <td>
+                        <input id="add"value="{{ result['Address'] }}" name="address" type="text" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4><label for="pass" style="font-weight: bold">Password : </label> </h4>
+                    </td>
+                    <td>
+                        <input id="pass"value="{{ result['Password'] }}" name="password" type="password" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6"><h4><input type="submit" value="Confirm Changes" ></h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div>
+        {% with messages =  get_flashed_messages(with_categories =  true) %}
+        {%if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            <p style="font-size: 24px;">{{ message }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</center>
+</body>
+</html>

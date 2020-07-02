@@ -1,0 +1,358 @@
+<!--
+Function of page:
+Registration and landing page
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Merchant Connect</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='./login_registration/login.css') }}">
+    <link rel=" icon" href="{{ url_for('static',filename='../common/img/icon-img.png') }}" type="image/icon">
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default" style="background-color: #1a1f71; color:#FFF; height: 100px;">
+        <ul class="nav navbar-nav ">
+
+            <img height="80" width="80" src="{{ url_for('static',filename='../common/img/shop.png') }}">
+        </ul>
+
+        <ul class="nav navbar-nav navbar-center">
+
+            <h2 style="color:gold"> MERCHANT CONNECT</h2>
+        </ul>
+        <ul class="navbar-nav ml-auto" style="padding-right:50px">
+            <button id="myBtn" type="button" class="btn btn-block btn-primary btn-lg"
+                style=" transform: translatex(702%);background-color: #faaa13">Signup</button>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <button id="myBtn1" type="button" class="btn btn-block btn-primary btn-lg"
+                style=" transform: translatex(-20%);background-color: #faaa13" onclick="window.location.href = '/login'"
+                ;">Login</button>
+        </ul>
+    </nav>
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!---slider-->
+
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+         <div class="carousel-inner" role="listbox">
+
+            <div class="item active">
+                <img src="{{ url_for('static',filename='../common/img/inv26.jpg') }}" style="height: 500px;width: 100%">
+                <div class="carousel-caption">
+                    <h1 style="color:#1a1f71;">CONNECTING SMALL BUSINESSES</h1>
+                </div>
+            </div>
+            <div class="item">
+                <div class="carousel-caption">
+                </div>
+
+                <img src="{{ url_for('static',filename='../common/img/inv22.jpg') }}" style="height: 500px;width: 100%">
+            </div>
+            <div class="item">
+                <div class="carousel-caption">
+                           <h1 style="color:black;">PERFORMANCE AND COMPETITION</h1>
+                </div>
+
+                <img src="{{ url_for('static',filename='../common/img/inv1.png') }}" style="height: 500px;width: 100%">
+            </div>
+            <div class="item">
+                <div class="carousel-caption">
+                    <h1 style="color:#1a1f71;">EMPOWERMENT AND GROWTH</h1>
+
+                </div>
+                <img src="{{ url_for('static',filename='../common/img/slider.jpg') }}" style="height: 500px;width: 100%">
+            </div>
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <br><br>
+    <center>
+        <h1>Merchant Connect</h1>
+
+        <div style="width: 50%; background-color:#f5f5f5; padding: 10px;">
+            <h3 style="color: #1a1f71;font-weight: bold;font-size: 20px; text-align:center;">We understand and recognise
+                the impact COVID-19 has had on small businesses and the difficulty of
+                small businesses in general to set up businesses, manage resources and thrive among it's competitor
+                businesses.
+            </h3>
+            <br>
+            <h3 style="color: gold;font-weight: bold;font-size: 20px; text-align:center;"> We want to EMPOWER your
+                business and help it operate in full potential to maximize success and growth by connecting you with
+                reliable
+                suppliers,
+                manage your inventory and give business performance insights
+            </h3>
+        </div>
+    </center>
+
+
+    <!-- REGISTER -->
+    <div class="modal" id="login/register" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center style="width: 100%;">
+                    <h2>REGISTER TO OUR WEBSITE!</h2>
+                </center>
+                <span class="close">&times;</span>
+
+            </div>
+            <div class="modal-body">
+                <div class="card mt-100" style="background-color: #f2f2f2">
+                    <div class="card-body">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="notification is-danger blink_me" style="color:red; font-weight: bold">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        <form class="form" method="post" action="/register/">
+                            <label>Email</label><br>
+                            <input type="email" class="form-control" name="email" required><br>
+                            <label>Password</label><br>
+                            <input type="password" class="form-control" name="password" required><br>
+                            <label>Confirm Password</label><br>
+                            <input type="password" class="form-control" name="confirm_password" required><br>
+                            <label>Merchant Name</label><br>
+                            <input type="text" class="form-control" name="merchant_name" required><br>
+                            <label>Registered Name</label><br>
+                            <input type="text" class="form-control" name="registered_name" required><br>
+                            <label>Contact Number</label><br>
+                            <input type="number" class="form-control" name="contact_number" required><br>
+                            <label>Address</label><br>
+                            <textarea class="form-control" name="address" required style="width: 50%;"></textarea><br>
+                            <input type="submit" class="button" value="Register">
+                            <!-- <label>Already a member?</label> <a href="/login" style="font-size: 16px;">Go To Home! </a> -->
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <h5>Already a member? <a href="/login">Go To Home!</a></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12 " style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/google-maps-marketing.jpg') }}"style="height: 220px;alt="Card image cap">
+                <div class="card-body ">
+                    <h5 class="card-title"><b style="color: #1a1f71">Connect with Merchants Globally with Visa Merchant Locator</b></h5>
+                    <p class="card-text">Get connect with merchants all over the world by searching about products and Merchant Category .
+                        Merchant Locator uses location to help map Visa-accepting merchants. Find the local stores and places to shop by searching for specific merchants or merchant categories within a specified distance.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv3.png') }}" style="height: 220px;" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b style="color: #1a1f71">Get Performance Analysis and Monthly Stats
+                    </b></h5>
+                    <p class="card-text">Graphical view of your performance and monthly stats with proper calculation of your orders and delivery and even get details of
+                        your profits/loss. You are also able to compare performance against many Visa card accepting locations. <b style="color: #1a1f71">Visa Merchant Measurement</b> helps to calculate your monthly stats and help your
+                    </p>
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv2.jpg') }}"style="height: 220px;alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b style="color: #1a1f71">Benefits of Easy Automatic Inventory Management</b></h5>
+                    <p class="card-text">Add, delete and modify your inventory. Have a feature of separate inventory for seller and buyer.
+                        Automatic incrementing/decrementing of your items, and easily manage your stocks with the help of our portal.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv4.jpg') }}" style="height: 220px;" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b style="color: #1a1f71">Track Your Order and Delivery History and even rate it in an efficient way</b></h5>
+                    <p class="card-text">Have a track on your previous orders and delivery history.Get a assurance of trusted suppliers
+                        with the the help of ratings. Get a chance to rate your delivery and make our portal more trustworthy.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12 " style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv5.jpg') }}"
+                    style="height: 220px;alt=" Card image cap">
+                <div class="card-body ">
+                    <h5 class="card-title"><b>Secure and Easy Checkout With VISA Support</b></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv13.jpg') }}"
+                    style="height: 220px;" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Post and Get Your Urgent Requirements Fulfil</b></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv14.jpg') }}"
+                    style="height: 220px;alt=" Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Facility to Negotiate With Supplier and get Products at Affordable
+                            Rates</b>
+                    </h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+
+                </div>
+            </div>
+            <div class="card col-lg-3 col-md-3 col-sm-6 col-xs-12" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static',filename='../common/img/inv20.jpg') }}"
+                    style="height: 220px;" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Track and Set Limits on Your Transactions</b></h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                        Some quick example text to build on the card title and make up the bulk of the card's content.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer class="container-fluid text-center">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Team Name</h3>
+                <h4>@console.pay()</h4>
+                <h4>Team Members </h4>
+                <center>
+                    <table style="border: none">
+                        <tr>
+                            <td colspan="6">Suraj Goel    </td>         <td colspan="6">Sahana Srinivasan</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">Gaurav Srivastava &emsp;  </td>   <td colspan="6">Sankalp Dayal</td>
+                        </tr>
+                        <tr>
+
+                            <td colspan="6">Haridher Pandyan    </td>   <td colspan="6">Prajwal S Belagavi</td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+
+
+            <div class="col-sm-4">
+
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="{{ url_for('static',filename='../common/img/shop.png') }}"
+                         style="width: 300px;height: 300px; transform: translatey(-20%)" class="icon">
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        var modal = document.getElementById("login/register");
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script>
+
+        function getLogin1() {
+            window.scrollBy(0, 820);
+        }
+        $('.carousel').carousel({
+            interval: 500
+        })
+    </script>
+</body>
+
+</html>
